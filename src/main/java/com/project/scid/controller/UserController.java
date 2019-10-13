@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -44,6 +46,20 @@ public class UserController {
         log.info("Request to update department: {}", user);
         User result = userRepo.save(user);
         return ResponseEntity.ok().body(result);
+    }
+
+    @GetMapping("/department/{id}/users")
+    Collection<User> getUserFromDepartment(@PathVariable Long id) {
+        return userRepo.findByDepartment(departmentRepo.findById(id).get());
+    }
+
+    @PostMapping("/department/{id}/user")
+    ResponseEntity<User> addUserIntoDepartment(@Valid @RequestBody User user, @PathVariable Long id) throws URISyntaxException {
+        user.setDepartment(departmentRepo.findById(id).get());
+        log.info("Request to create department: {}", user);
+        User result = userRepo.save(user);
+        return ResponseEntity.created(new URI("/api/user/" + result.getId()))
+                .body(result);
     }
 
 }

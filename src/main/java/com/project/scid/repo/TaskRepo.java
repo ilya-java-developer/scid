@@ -1,4 +1,8 @@
 package com.project.scid.repo;
 
-public interface TaskRepo {
+import com.project.scid.model.Task;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TaskRepo  extends JpaRepository<Task, Long> {
+
 }

@@ -71,18 +71,6 @@ public class DepartmentController {
         return ResponseEntity.ok().build();
     }
 //-------------------------------------------------------------------
-    @GetMapping("/department/{id}/users")
-    Collection<User> getUserFromDepartment(@PathVariable Long id) {
-        return userRepo.findByDepartment(departmentRepo.findById(id).get());
-    }
 
-    @PostMapping("/department/{id}/user")
-    ResponseEntity<User> addUserIntoDepartment(@Valid @RequestBody User user, @PathVariable Long id) throws URISyntaxException {
-        user.setDepartment(departmentRepo.findById(id).get());
-        log.info("Request to create department: {}", user);
-        User result = userRepo.save(user);
-        return ResponseEntity.created(new URI("/api/user/" + result.getId()))
-                .body(result);
-    }
 
 }
