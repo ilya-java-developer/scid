@@ -36,6 +36,8 @@ public class UserController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+
+
     @GetMapping("/user/{id}/subusers")
     Collection<User> getSubUsers(@PathVariable Long id) {
         return userRepo.findByBoss(userRepo.findById(id).get());
