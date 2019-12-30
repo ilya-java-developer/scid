@@ -19,7 +19,7 @@ public class Department {
     private Department bossDepartment;
 
     @OneToMany
-    @JoinColumn(name = "task_id")
+    @JoinColumn(name = "dep_id")
     private List<Task> taskList;
 
 }

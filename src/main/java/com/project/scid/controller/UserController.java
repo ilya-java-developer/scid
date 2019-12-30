@@ -37,7 +37,6 @@ public class UserController {
     }
 
 
-
     @GetMapping("/user/{id}/subusers")
     Collection<User> getSubUsers(@PathVariable Long id) {
         return userRepo.findByBoss(userRepo.findById(id).get());
@@ -62,6 +61,13 @@ public class UserController {
         User result = userRepo.save(user);
         return ResponseEntity.created(new URI("/api/user/" + result.getId()))
                 .body(result);
+    }
+
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        log.info("Request to delete user: {}", id);
+        userRepo.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
 }

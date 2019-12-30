@@ -17,6 +17,12 @@ public class Task {
     @ManyToOne
     @JoinColumn(name="state_id")
     private State state;
+
+//    @ManyToOne
+//    private User user;
+//
+//    @ManyToOne
+//    private Department department;
 //    private Department departmentOwner;
 //    private User userOwner;
 
